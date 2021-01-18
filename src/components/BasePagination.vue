@@ -1,5 +1,5 @@
 <template>
-  <ul class="catalog__pagination pagination">
+  <ul class="catalog__pagination pagination" v-if="count">
     <li class="pagination__item">
       <a aria-label="Предыдущая страница" 
         href="#" 
@@ -13,17 +13,15 @@
       </a>
     </li>
 
-
     <li class="pagination__item" v-for="(pageNumber, index) in pagesInPagination" :key="index">
       <a class="pagination__link" 
         :class="{'pagination__link--current': pageNumber === page}" 
-        :href="pageNumber === page ? false : '#'" 
-        @click.prevent="paginate(pageNumber)"
+        :href="pageNumber === page || pageNumber === '...' ? false : '#'" 
+        @click.prevent="paginate($event, pageNumber)"
       >
         {{ pageNumber }}
       </a>
     </li>
-
 
     <li class="pagination__item">
       <a aria-label="Следующая страница" 
@@ -48,10 +46,10 @@ export default {
       return Math.ceil(this.count / this.perPage);
     },
     pagesInPagination() {
-      const allPages = Array.from({length: Math.ceil(this.count / this.perPage)}, (v, k) => k + 1);
+      const allPages = Array.from({length: this.pagesAll}, (v, k) => k + 1);
       let pagesArr = [];
 
-      const addPoint = (first, two, method = 'push') => {
+      const addPoints = (first, two, method = 'push') => {
         if (pagesArr.indexOf(first) == -1) {
           if(pagesArr.indexOf(two) == -1) {
             pagesArr[method]('...');
@@ -61,7 +59,7 @@ export default {
       };
 
       let currentPageIndex = allPages.indexOf(this.page);
-      let j = 1;
+      let j = allPages.length === 7 ? 2 : 1;
 
       for(let i = this.page < allPages[4] ? 3 : 1; i > 0; i--) {
         if(!allPages[currentPageIndex - i]) {
@@ -76,31 +74,40 @@ export default {
       for(let i = 1; i <= j; i++) {
         if(allPages[currentPageIndex + i]) {
           pagesArr.push(allPages[currentPageIndex + i]);
-          if(this.page === allPages[allPages.length - 4]){
+          if(this.page === allPages[allPages.length - 4] && allPages.length > 7){
             pagesArr.push(allPages[currentPageIndex + i + 1]);
           }
         }
       }
 
-      addPoint(allPages[allPages.length - 1], allPages[allPages.length - 2]);
+      addPoints(allPages[allPages.length - 1], allPages[allPages.length - 2]);
 
       currentPageIndex = allPages.indexOf(pagesArr[0]);
       const endLenght = pagesArr.length;
-      for(let i = 1; i < 6 - endLenght; i++) {
+      let numElInEnd;
+
+      if(allPages.length === 7) {
+        numElInEnd = 7 - endLenght
+      } else {
+        numElInEnd = 6 - endLenght
+      }
+      
+      for(let i = 1; i < numElInEnd; i++) {
         if(allPages[currentPageIndex - i]) {
           pagesArr.unshift(allPages[currentPageIndex - i]);
         }
       }
       
-      addPoint(allPages[0], allPages[1], 'unshift');
+      addPoints(allPages[0], allPages[1], 'unshift');
 
       return pagesArr;
     }
   },
   methods: {
-    paginate(page) {
-      
-      this.$emit('update:page', page);
+    paginate(e, page) {
+      if(!e.target.innerText.includes('...')){
+        this.$emit('update:page', page);
+      }
     },
     prevPage() {
       if(this.page > 1) {

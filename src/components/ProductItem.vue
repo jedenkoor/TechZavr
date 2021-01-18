@@ -8,10 +8,17 @@
     </h3>
     <span class="catalog__price">{{ product.price }}</span>
     <ul class="colors colors--black">
-      <li class="colors__item">
+      <li class="colors__item" v-for="(color, index) in product.colors" :key="index">
         <label class="colors__label">
-          <input class="colors__radio sr-only" type="radio" name="color-1" value="#73B6EA" checked="">
-          <span class="colors__value" style="background-color: #73B6EA;"></span>
+          <input 
+            class="colors__radio sr-only"
+            type="radio"
+            :name="`color${product.id}`"
+            :value="color"
+            :checked="product.currentColor == color"
+            @change="setColor(color)"
+          >
+          <span class="colors__value" :style="`background-color: ${color}`"></span>
         </label>
       </li>
     </ul>
@@ -23,5 +30,10 @@ export default {
   props: [
     'product'
   ],
+  methods: {
+    setColor(color) {
+      this.product.currentColor = color;
+    }
+  },
 }
 </script>
