@@ -1,7 +1,7 @@
 export default function getPagesInPagination(pagesAll, page) {
   const allPages = Array.from({length: pagesAll}, (v, k) => k + 1),
     numItemsInPagination = 7, //Количество элементов в пагинации, учитывая элементы с точками
-    numItemsRightOfCurrent = page < allPages[4] ? 3 : 1; //Условие, чтобы вначале количество элементов в пагинации не изменялось
+    numItemsRightOfCurrent = page < allPages[4] ? 3 : 1; //Условие, чтобы в начале количество элементов в пагинации не изменялось
 
   let pagesArr = [];
 
@@ -33,7 +33,7 @@ export default function getPagesInPagination(pagesAll, page) {
   const endLenght = pagesArr.length;
   let numElInEnd;
 
-  if(allPages.length === numItemsInPagination) { //Условие, чтобы вконце количество элементов в пагинации не изменялось
+  if(allPages.length === numItemsInPagination) { //Условие, чтобы в конце количество элементов в пагинации не изменялось
     numElInEnd = numItemsInPagination - endLenght
   } else {
     numElInEnd = numItemsInPagination - 1 - endLenght
