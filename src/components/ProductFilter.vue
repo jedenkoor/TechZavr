@@ -30,8 +30,8 @@
         <ul class="colors">
           <li class="colors__item" v-for="(color, index) in filterColors" :key="index">
             <label class="colors__label">
-              <input class="colors__radio sr-only" type="checkbox" :value="color" :checked="currentColorsChecked.includes(color)" @change="checkColor(color)">
-              <span class="colors__value" :style="`background-color: ${color}`">
+              <input class="colors__radio sr-only" type="checkbox" :value="color.code" :checked="currentColorsChecked.includes(color.code)" @change="checkColor(color.code)">
+              <span class="colors__value" :style="`background-color: ${color.code}`">
               </span>
             </label>
           </li>
@@ -62,6 +62,7 @@
 <script>
 import productsData from "../data/products"
 import categories from "../data/categories"
+import colors from "../data/colors"
 
 export default {
   props: ['priceFrom', 'priceTo', 'categoryId', 'colorsChecked'],
@@ -75,15 +76,7 @@ export default {
   },
   computed: {
     filterColors() {
-      let filterColors = [];
-      for(const productKey in productsData) {
-        for(const colorKey in productsData[productKey].colors){
-          if(!filterColors.includes(productsData[productKey].colors[colorKey])) {
-            filterColors.push(productsData[productKey].colors[colorKey]);
-          }
-        }
-      }
-      return filterColors;
+      return colors;
     },
     categories() {
       return categories;

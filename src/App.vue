@@ -51,7 +51,7 @@ export default {
       filterColorsChecked: [],
 
       page: 1,
-      productsPerPage: 20,
+      productsPerPage: 1,
       productsList: productsData,
     }
   },
@@ -73,11 +73,7 @@ export default {
 
       if(this.filterColorsChecked.length) {
         filteredProducts = filteredProducts.filter(product => {
-          for(const colorKey in this.filterColorsChecked) {
-            if(product.colors.includes(this.filterColorsChecked[colorKey])) {
-              return true
-            }
-          }
+          return this.filterColorsChecked.some(color => product.colors.includes(color));
         });
       }
 
