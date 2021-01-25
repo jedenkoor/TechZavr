@@ -27,15 +27,8 @@
 
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
-        <ul class="colors">
-          <li class="colors__item" v-for="(color, index) in filterColors" :key="index">
-            <label class="colors__label">
-              <input class="colors__radio sr-only" type="checkbox" :value="color.code" :checked="currentColorsChecked.includes(color.code)" @change="checkColor(color.code)">
-              <span class="colors__value" :style="`background-color: ${color.code}`">
-              </span>
-            </label>
-          </li>
-        </ul>
+
+        <ProductColors :colors="filterColors" :currentColor.sync="currentColorChecked"/>
       </fieldset>
 
       <fieldset class="form__block">
@@ -60,23 +53,27 @@
 </template>
 
 <script>
-import productsData from "../data/products"
 import categories from "../data/categories"
 import colors from "../data/colors"
 
+import ProductColors from "./ProductColors"
+
 export default {
-  props: ['priceFrom', 'priceTo', 'categoryId', 'colorsChecked'],
+  props: ['priceFrom', 'priceTo', 'categoryId', 'colorChecked'],
   data() {
     return {
       currentPriceFrom: 0,
       currentPriceTo: 0,
       currentCategoryId: 0,
-      currentColorsChecked: []
+      currentColorChecked: ''
     }
+  },
+  components: {
+    ProductColors
   },
   computed: {
     filterColors() {
-      return colors;
+      return Array.from(colors, color => color.code);
     },
     categories() {
       return categories;
@@ -84,26 +81,18 @@ export default {
   },
   methods: {
     submit() {
+      console.log();
       this.$emit('update:priceFrom', this.currentPriceFrom);
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
-      this.$emit('update:colorsChecked', this.currentColorsChecked.slice());
+      this.$emit('update:colorChecked', this.currentColorChecked);
     },
     reset() {
       this.$emit('update:priceFrom', 0);
       this.$emit('update:priceTo', 0);
       this.$emit('update:categoryId', 0);
-      this.$emit('update:colorsChecked', '');
-      this.currentColorsChecked = [];
-    },
-    checkColor(color) {
-      if(!this.currentColorsChecked.includes(color)) {
-        this.currentColorsChecked.push(color);
-      } else {
-        const index = this.currentColorsChecked.indexOf(color);
-        this.currentColorsChecked.splice(index, 1);
-      }
-    },
+      this.$emit('update:colorChecked', '');
+    }
   },
   watch: {
     priceFrom(value) {
@@ -114,6 +103,9 @@ export default {
     },
     categoryId(value) {
       this.currentCategoryId = value;
+    },
+    colorChecked(value) {
+      this.currentColorChecked = value;
     }
   },
 }

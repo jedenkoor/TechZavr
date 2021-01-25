@@ -8,7 +8,7 @@
     </h3>
     <span class="catalog__price">{{ product.price }}</span>
 
-    <ProductColors :colors="product.colors" :currentColor.sync="product.currentColor"/>
+    <ProductColors :colors="product.colors" :currentColor.sync="product.currentColor" :add-class="'colors--black'"/>
 
   </li>
 </template>
