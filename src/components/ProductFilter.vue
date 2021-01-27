@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import categories from "../data/categories"
-import colors from "../data/colors"
+import categories from "@/data/categories"
+import colors from "@/data/colors"
 
-import ProductColors from "./ProductColors"
+import ProductColors from "@/components/ProductColors"
 
 export default {
   props: ['priceFrom', 'priceTo', 'categoryId', 'colorChecked'],

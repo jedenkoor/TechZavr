@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import getPagesInPagination from "../functions/pagination"
+import getPagesInPagination from "@/functions/pagination"
 
 export default {
   props: ['page', 'count', 'perPage'],
