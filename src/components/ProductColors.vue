@@ -1,5 +1,5 @@
 <template>
-  <ul class="colors" :class="addClass">
+  <ul class="colors">
     <li class="colors__item" v-for="(color, index) in colors" :key="index">
       <label class="colors__label">
         <input 
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ['colors', 'currentColor', 'addClass'],
+  props: ['colors', 'currentColor'],
   methods: {
     setColor(color) {
       this.$emit('update:currentColor', color);

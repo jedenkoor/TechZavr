@@ -1,45 +1,21 @@
 <template>
-  <component :is="currentPageComponent" :page-params="currentPageParams"></component>
+  <div>
+    <TheHeader/>
+
+    <router-view/>
+
+    <TheFooter/>
+  </div>
 </template>
 
 <script>
-import MainPage from "@/pages/MainPage"
-import ProductPage from "@/pages/ProductPage"
-import NotFoundPage from "@/pages/NotFoundPage"
-
-import eventBus from "@/eventBus";
-
-const routes = {
-  main: 'MainPage',
-  product: 'ProductPage'
-}
-
+import TheHeader from '@/components/TheHeader'
+import TheFooter from '@/components/TheFooter'
 
 export default {
-  data() {
-    return {
-      currentPage: 'main',
-      currentPageParams: {}
-    }
-  },
   components: {
-    MainPage,
-    ProductPage,
-    NotFoundPage
-  },
-  computed: {
-    currentPageComponent() {
-      return routes[this.currentPage] || 'NotFoundPage'
-    }
-  },
-  methods: {
-    goToPage(pageName, pageParams = {}) {
-      this.currentPage = pageName;
-      this.currentPageParams = pageParams
-    }
-  },
-  created() {
-    eventBus.$on('goToPage', (pageName, pageParams) => this.goToPage(pageName, pageParams))
-  },
+    TheHeader,
+    TheFooter,
+  }
 }
 </script>
