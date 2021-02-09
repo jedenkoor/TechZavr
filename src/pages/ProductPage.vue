@@ -116,8 +116,8 @@ import products from "@/data/products"
 import categories from "@/data/categories"
 import numberFormat from "@/functions/numberFormat"
 
-import ProductColors from "@/components/ProductColors"
-import ProductQuantity from "@/components/ProductQuantity"
+import ProductColors from "@/components/Product/ProductColors"
+import ProductQuantity from "@/components/Product/ProductQuantity"
 
 export default {
   data () { 
@@ -148,6 +148,13 @@ export default {
   },
   mounted() {
     this.currentColor = this.product.currentColor
+  },
+  watch: {
+    '$route.params.id'(v) {
+      if(!this.product) {
+        this.$router.replace({name: 'notFound'})
+      }
+    }
   },
   filters: {
     numberFormat

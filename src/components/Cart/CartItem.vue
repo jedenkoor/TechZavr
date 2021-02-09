@@ -24,9 +24,10 @@
 </template>
 
 <script>
-import numberFormat from "@/functions/numberFormat"
 import { mapMutations } from 'vuex'
-import ProductQuantity from "@/components/ProductQuantity"
+import numberFormat from "@/functions/numberFormat"
+
+import ProductQuantity from "@/components/Product/ProductQuantity"
 
 export default {
   props: ['item'],

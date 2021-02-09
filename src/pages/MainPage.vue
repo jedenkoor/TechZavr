@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import ProductList from '@/components/ProductList'
-import BasePagination from '@/components/BasePagination'
-import ProductFilter from '@/components/ProductFilter'
-
 import productsData from "@/data/products"
+
+import BasePagination from '@/components/Base/BasePagination'
+import ProductList from '@/components/Product/ProductList'
+import ProductFilter from '@/components/Product/ProductFilter'
 
 export default {
   components: {

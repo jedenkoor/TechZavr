@@ -1,3 +1,3 @@
 export default function numberFormat(number) {
-  return number ? new Intl.NumberFormat().format(number) : 0;
+  return number ? new Intl.NumberFormat().format(`${number}`.replace(/[^0-9]/g,"")) : 0;
 }

@@ -17,9 +17,12 @@
     <section class="cart">
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
-          <ul class="cart__list">
+          <ul class="cart__list" v-if="cartLength">
             <CartItem v-for="item in products" :key="item.productId" :item="item"/>
           </ul>
+          <div class="cart__list--empty" v-else>
+            <p>Ваша корзина пуста</p>
+          </div>
         </div>
         <div class="cart__block">
           <p class="cart__desc">Мы&nbsp;посчитаем стоимость доставки на&nbsp;следующем этапе</p>
@@ -32,10 +35,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import numberFormat from "@/functions/numberFormat"
 import declOfNum from "@/functions/declOfNum"
-import { mapGetters } from 'vuex'
-import CartItem from '@/components/CartItem'
+
+import CartItem from '@/components/Cart/CartItem'
 
 export default {
   components: {

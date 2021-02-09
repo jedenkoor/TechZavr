@@ -32,7 +32,7 @@
       </fieldset>
 
       <fieldset class="form__block">
-        <legend class="form__legend">Объемб в ГБ</legend>
+        <legend class="form__legend">Объем в ГБ</legend>
         <ul class="check-list">
           <li class="check-list__item">
             <label class="check-list__label">
@@ -56,7 +56,7 @@
 import categories from "@/data/categories"
 import colors from "@/data/colors"
 
-import ProductColors from "@/components/ProductColors"
+import ProductColors from "@/components/Product/ProductColors"
 
 export default {
   props: ['priceFrom', 'priceTo', 'categoryId', 'colorChecked'],

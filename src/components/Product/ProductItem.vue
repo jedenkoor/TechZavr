@@ -16,7 +16,7 @@
 <script>
 import numberFormat from "@/functions/numberFormat"
 
-import ProductColors from "@/components/ProductColors";
+import ProductColors from "@/components/Product/ProductColors";
 
 export default {
   props: [

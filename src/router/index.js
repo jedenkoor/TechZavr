@@ -8,10 +8,30 @@ import NotFoundPage from '@/pages/NotFoundPage'
 Vue.use(VueRouter);
 
 const routes = [
-    {name: 'main', component: MainPage, path: '/'},
-    {name: 'product', component: ProductPage, path: '/product/:id'},
-    {name: 'cart', component: CartPage, path: '/cart'},
-    {name: 'notFound', component: NotFoundPage, path: '*'},
+  {
+    name: 'main', 
+    component: MainPage, 
+    path: '/'
+  }, 
+  {
+    name: 'product', 
+    component: ProductPage, 
+    path: '/product/:id'
+  }, 
+  {
+    name: 'cart', 
+    component: CartPage, 
+    path: '/cart'
+  }, 
+  {
+    name: 'notFound', 
+    component: NotFoundPage, 
+    path: '/404'
+  },
+  {
+    path: '*', 
+    redirect: '/404' 
+  }
 ];
 
 const router = new VueRouter({
