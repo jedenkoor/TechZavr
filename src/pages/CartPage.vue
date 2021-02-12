@@ -14,9 +14,9 @@
       <div class="content__top">
         <ul class="breadcrumbs">
           <li class="breadcrumbs__item">
-            <router-link class="breadcrumbs__link" :to="{ name: 'main' }"
-              >Каталог</router-link
-            >
+            <router-link class="breadcrumbs__link" :to="{ name: 'main' }">
+              Каталог
+            </router-link>
           </li>
           <li class="breadcrumbs__item">
             <a class="breadcrumbs__link">Корзина</a>
@@ -49,9 +49,14 @@
             <p class="cart__price">
               Итого: <span>{{ totalPrice | numberFormat }} ₽</span>
             </p>
-            <button class="cart__button button button--primery" type="submit">
+            <router-link
+              class="cart__button button button--primery"
+              tag="button"
+              v-if="cartLength"
+              :to="{ name: 'order' }"
+            >
               Оформить заказ
-            </button>
+            </router-link>
           </div>
         </form>
       </section>

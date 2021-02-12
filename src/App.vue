@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper">
-    <TheHeader/>
+    <TheHeader />
 
-    <router-view/>
+    <router-view />
 
-    <TheFooter/>
+    <TheFooter />
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/TheHeader'
-import TheFooter from '@/components/TheFooter'
+import TheHeader from "@/components/TheHeader";
+import TheFooter from "@/components/TheFooter";
 
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -20,15 +20,15 @@ export default {
     TheFooter,
   },
   methods: {
-    ...mapActions(['loadCart']),
-    ...mapMutations(['updateUserAccessKey'])
+    ...mapActions(["loadCart"]),
+    ...mapMutations(["updateUserAccessKey"]),
   },
   created() {
-    const userAccessKey = localStorage.getItem('userAccessKey');
-    if(userAccessKey) {
+    const userAccessKey = localStorage.getItem("userAccessKey");
+    if (userAccessKey) {
       this.updateUserAccessKey(userAccessKey);
     }
     this.loadCart();
   },
-}
+};
 </script>

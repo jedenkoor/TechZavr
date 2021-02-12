@@ -12,10 +12,22 @@ export default new Vuex.Store({
     userAccessKey: null,
     cartProductsData: [],
 
+    orderInfo: null,
+
     cartLoading: false,
     cartLoadingError: false,
+
+    orderInfoLoading: false,
+    orderInfoLoadingError: false,
   },
   mutations: {
+    updateOrderInfo(state, orderInfo) {
+      state.orderInfo = orderInfo;
+    },
+    resetCart(state) {
+      state.cartProducts = [];
+      state.cartProductsData = [];
+    },
     updateCartProductAmount(state, { productId, amount }) {
       const item = state.cartProducts.find(
         (item) => item.productId === productId
@@ -66,7 +78,7 @@ export default new Vuex.Store({
       );
     },
     cartLength(state) {
-      return state.cartProducts.length;
+      return state.cartProducts.reduce((acc, item) => item.amount + acc, 0);
     },
     cartLoading(state) {
       return state.cartLoading;
@@ -74,8 +86,32 @@ export default new Vuex.Store({
     cartLoadingError(state) {
       return state.cartLoadingError;
     },
+    orderInfo(state) {
+      return state.orderInfo;
+    },
+    orderInfoLoading(state) {
+      return state.orderInfoLoading;
+    },
+    orderInfoLoadingError(state) {
+      return state.orderInfoLoadingError;
+    },
   },
   actions: {
+    loadOrderInfo(context, orderId) {
+      context.state.orderInfoLoading = true;
+      context.state.orderInfoLoadingError = false;
+      return axios
+        .get(`${API_BASE_URL}/api/orders/${orderId}`, {
+          params: {
+            userAccessKey: context.state.userAccessKey,
+          },
+        })
+        .then((response) => {
+          context.commit("updateOrderInfo", response.data);
+        })
+        .catch(() => (context.state.orderInfoLoadingError = true))
+        .then(() => (context.state.orderInfoLoading = false));
+    },
     loadCart(context) {
       context.state.cartLoading = true;
       context.state.cartLoadingError = false;
