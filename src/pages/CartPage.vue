@@ -51,11 +51,12 @@
             </p>
             <router-link
               class="cart__button button button--primery"
-              tag="button"
               v-if="cartLength"
+              custom
+              v-slot="{}"
               :to="{ name: 'order' }"
             >
-              Оформить заказ
+              <button>Оформить заказ</button>
             </router-link>
           </div>
         </form>
