@@ -53,10 +53,10 @@
               class="cart__button button button--primery"
               v-if="cartLength"
               custom
-              v-slot="{}"
+              v-slot="{ href, navigate }"
               :to="{ name: 'order' }"
             >
-              <button>Оформить заказ</button>
+              <button :href="href" @click="navigate">Оформить заказ</button>
             </router-link>
           </div>
         </form>
