@@ -1,13 +1,7 @@
 <template>
   <main class="content container">
     <div class="preloader" v-if="orderInfoLoading">
-      <img src="img/loader.gif" alt="Preloader" />
-    </div>
-
-    <div class="preloader" v-if="orderInfoLoadingError">
-      Произошла ошибка<br />
-      при загрузке
-      <button @click="loadOrderInfo">Попробовать еще раз</button>
+      <img src="/img/loader.gif" alt="Preloader" />
     </div>
 
     <div v-if="orderLength">
@@ -124,7 +118,10 @@ export default {
   },
   watch: {
     "$route.params.id"() {
-      if (this.$route.params.id !== this.$store.state.orderInfo.id) {
+      this.loadOrderInfo(this.$route.params.id);
+    },
+    orderInfoLoadingError() {
+      if (this.orderInfoLoadingError) {
         this.$router.replace({ name: "notFound" });
       }
     },

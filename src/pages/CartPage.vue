@@ -1,7 +1,7 @@
 <template>
   <main class="content container">
     <div class="preloader" v-if="cartLoading">
-      <img src="img/loader.gif" alt="Preloader" />
+      <img src="/img/loader.gif" alt="Preloader" />
     </div>
 
     <div class="preloader" v-if="cartLoadingError">
