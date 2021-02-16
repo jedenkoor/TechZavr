@@ -1,6 +1,6 @@
 # skillbox-vue
 
-# https://jedenkoor.github.io/Raiffeisen/build/index.html
+# http://techzafr.jedenkoor.ru/
 
 ## Project setup
 
