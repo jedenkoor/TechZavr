@@ -1,7 +1,3 @@
-# skillbox-vue
-
-# http://techzafr.jedenkoor.ru/
-
 ## Project setup
 
 ```
